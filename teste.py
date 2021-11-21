@@ -82,13 +82,32 @@ def criarHashTable():
     print("Nós:")
     print(nos)
 
+    return nos
 
-def encontrarNo(nos):
-    noInicial=2
-    noBuscado=4
+def encontrarNoSequencial(nos, numNoInicial, numNoBuscado):
+    numNoAtual=numNoInicial
+    numBuscas = 0
+    while numNoAtual != numNoBuscado:
+        numBuscas = numBuscas+1
+        print("no atual:",numNoAtual)
+        print("no buscado:",numNoBuscado)
+        print("prox nó:", nos[numNoAtual-1]["próx nó"])
+
+        if nos[numNoAtual-1]["nóAtual"] == numNoBuscado:
+            print("num de buscas:", numBuscas)
+            return nos[numNoAtual-1]
+            
+        else:
+            numNoAtual=nos[numNoAtual-1]["próx nó"]
+
+            if numNoAtual == numNoBuscado:
+                print("num de buscas:", numBuscas)
+                return nos[numNoAtual-1]
 
 
 if __name__ == "__main__":
 
-    criarHashTable()
+    nos=criarHashTable()
+
+    print("nó encontrado!:", encontrarNoSequencial(nos, 2, 7))
     
