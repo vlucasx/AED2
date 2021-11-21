@@ -15,7 +15,7 @@ def criarHashTable():
     frases = []
     hashFrases = []
 
-    for i in range(31): # aceita: (múltiplos de 3 e de 2 ao mesmo tempo) + 1
+    for i in range(91): # aceita: (múltiplos de 3 e de 2 ao mesmo tempo) + 1
         frases.append("essa é a frase"+str(i+1))
 
 
@@ -41,10 +41,10 @@ def criarHashTable():
     while i <len(frases)-1:
 
         if k+distanciaMax > (len(frases)-1)/3:
-            noDistante = abs((len(frases)-1)/3 - (k+distanciaMax))
+            noDistante = int(abs((len(frases)-1)/3 - (k+distanciaMax)))
         else:
             print("valor de k:", k)
-            noDistante = k+distanciaMax
+            noDistante = int(k+distanciaMax)
 
         if i==0:
             anterior = (len(frases)-1)/3
@@ -85,6 +85,9 @@ def criarHashTable():
     return nos
 
 def encontrarNoSequencial(nos, numNoInicial, numNoBuscado):
+    if numNoInicial == numNoBuscado:
+        return nos[numNoInicial-1]
+
     numNoAtual=numNoInicial
     numBuscas = 0
     while numNoAtual != numNoBuscado:
@@ -92,11 +95,12 @@ def encontrarNoSequencial(nos, numNoInicial, numNoBuscado):
         print("no atual:",numNoAtual)
         print("no buscado:",numNoBuscado)
         print("prox nó:", nos[numNoAtual-1]["próx nó"])
+        print(" ")
 
         if nos[numNoAtual-1]["nóAtual"] == numNoBuscado:
             print("num de buscas:", numBuscas)
             return nos[numNoAtual-1]
-            
+
         else:
             numNoAtual=nos[numNoAtual-1]["próx nó"]
 
@@ -105,9 +109,50 @@ def encontrarNoSequencial(nos, numNoInicial, numNoBuscado):
                 return nos[numNoAtual-1]
 
 
+def encontrarNoPulando(nos, numNoInicial, numNoBuscado):
+    if numNoInicial == numNoBuscado:
+        return nos[numNoInicial-1]
+
+    numNoAtual=numNoInicial
+    numBuscas = 0
+    while numNoAtual != numNoBuscado:
+        numBuscas = numBuscas+1
+
+        while numNoBuscado >= nos[numNoAtual-1]["nó distante"]:
+              print("no atual:",numNoAtual)
+              print("no buscado:",numNoBuscado)
+              print("prox nó:", nos[numNoAtual-1]["próx nó"])
+              print(" ")
+              numNoAtual = nos[numNoAtual-1]["nó distante"]
+              numBuscas = numBuscas+1
+              if abs(numNoBuscado - numNoAtual) < abs(numNoBuscado - nos[numNoAtual-1]["nó distante"]):
+                  break
+
+              print("nó distante:", nos[numNoAtual-1]["nó distante"])
+
+
+
+        print("no atual:",numNoAtual)
+        print("no buscado:",numNoBuscado)
+        print("prox nó:", nos[numNoAtual-1]["próx nó"])
+        print(" ")
+
+        if nos[numNoAtual-1]["nóAtual"] == numNoBuscado:
+            print("num de buscas:", numBuscas)
+            return nos[numNoAtual-1]
+
+        else:
+            numNoAtual=nos[numNoAtual-1]["próx nó"]
+
+            if numNoAtual == numNoBuscado:
+                print("num de buscas:", numBuscas)
+                return nos[numNoAtual-1]
+
+
+
 if __name__ == "__main__":
 
     nos=criarHashTable()
-
-    print("nó encontrado!:", encontrarNoSequencial(nos, 2, 7))
+    print(" ")
+    print("nó encontrado!:", encontrarNoPulando(nos, 1, 23))
     
