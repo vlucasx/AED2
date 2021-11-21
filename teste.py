@@ -15,7 +15,7 @@ def criarHashTable():
     frases = []
     hashFrases = []
 
-    for i in range(61):
+    for i in range(31): # aceita: (múltiplos de 3 e de 2 ao mesmo tempo) + 1
         frases.append("essa é a frase"+str(i+1))
 
 
@@ -34,7 +34,18 @@ def criarHashTable():
     i=0
     k=1
 
+
+
+    distanciaMax = (len(frases)-1)/(2*3)
+    print("distmax:",distanciaMax)
     while i <len(frases)-1:
+
+        if k+distanciaMax > (len(frases)-1)/3:
+            noDistante = abs((len(frases)-1)/3 - (k+distanciaMax))
+        else:
+            print("valor de k:", k)
+            noDistante = k+distanciaMax
+
         if i==0:
             anterior = (len(frases)-1)/3
 
@@ -46,12 +57,12 @@ def criarHashTable():
         else:
             posterior=k+1
 
-
         no = {
                 "nó anterior":anterior, 
-                "nó":k,
+                "nóAtual":k,
                 "próx nó":posterior,
-                
+                "nó distante": noDistante,
+
                 "frase1":frases[i],
                 "hashFrase1":hashFrases[i],
 
