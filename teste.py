@@ -15,7 +15,10 @@ def criarHashTable():
     frases = []
     hashFrases = []
 
-    for i in range(91): # aceita: (múltiplos de 3 e de 2 ao mesmo tempo) + 1
+    numNos = 8
+    quantidadeFrases=3*numNos # aceita: (múltiplos de 3 e de 2 ao mesmo tempo)
+
+    for i in range(quantidadeFrases+1): 
         frases.append("essa é a frase"+str(i+1))
 
 
@@ -36,7 +39,7 @@ def criarHashTable():
 
 
 
-    distanciaMax = (len(frases)-1)/(2*3)
+    distanciaMax = round((len(frases)-1)/(2*3)) # arredonda o número para garantir uma posição inteira. (2.5 vira 3)
     print("distmax:",distanciaMax)
     while i < len(frases)-1:
 
@@ -160,4 +163,4 @@ if __name__ == "__main__":
 
     nos=criarHashTable()
     print(" ")
-    print("nó encontrado!:", encontrarNoPulando(nos, 1, 20))
+    print("nó encontrado!:", encontrarNoPulando(nos, 1, 7)) #se colocar um nó maior que a quantidade ou um nó que não está na lista, ele entra em loop infinito
