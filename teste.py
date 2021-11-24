@@ -38,7 +38,7 @@ def criarHashTable():
 
     distanciaMax = (len(frases)-1)/(2*3)
     print("distmax:",distanciaMax)
-    while i <len(frases)-1:
+    while i < len(frases)-1:
 
         if k+distanciaMax > (len(frases)-1)/3:
             noDistante = int(abs((len(frases)-1)/3 - (k+distanciaMax)))
@@ -119,19 +119,25 @@ def encontrarNoPulando(nos, numNoInicial, numNoBuscado):
         numBuscas = numBuscas+1
 
         while numNoBuscado >= nos[numNoAtual-1]["nó distante"]:
-              print("no atual:",numNoAtual)
-              print("no buscado:",numNoBuscado)
-              print("prox nó:", nos[numNoAtual-1]["próx nó"])
-              print(" ")
-              numNoAtual = nos[numNoAtual-1]["nó distante"]
-              numBuscas = numBuscas+1
+              
+              
+              print("nó atual:",numNoAtual)
+              print("nó buscado:",numNoBuscado)
+              print("nó distante:",nos[numNoAtual-1]["nó distante"])
+              print("distancia do nó atual ao nó buscado:",abs(numNoBuscado - numNoAtual))
+              print("distancia do nó distante ao nó buscado:", abs(numNoBuscado - nos[numNoAtual-1]["nó distante"]))
+
               if abs(numNoBuscado - numNoAtual) < abs(numNoBuscado - nos[numNoAtual-1]["nó distante"]):
+                  print("distância do nó atual ao nó buscado é menor que a do nó distante ao nó buscado")
                   break
+              else:
+                    print("pulou para o nó distante")
+                    numNoAtual = nos[numNoAtual-1]["nó distante"]
+                    numBuscas = numBuscas+1
+              print(" ")
+            
 
-              print("nó distante:", nos[numNoAtual-1]["nó distante"])
-
-
-
+        print(" ")
         print("no atual:",numNoAtual)
         print("no buscado:",numNoBuscado)
         print("prox nó:", nos[numNoAtual-1]["próx nó"])
@@ -154,5 +160,4 @@ if __name__ == "__main__":
 
     nos=criarHashTable()
     print(" ")
-    print("nó encontrado!:", encontrarNoPulando(nos, 1, 23))
-    
+    print("nó encontrado!:", encontrarNoPulando(nos, 1, 20))
